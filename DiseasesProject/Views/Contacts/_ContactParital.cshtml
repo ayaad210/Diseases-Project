@@ -1,0 +1,76 @@
+﻿ @model DiseasesProject.Models.Contact
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+}
+
+
+
+    @using (Html.BeginForm("Create", "Contacts"))
+    {
+        @Html.AntiForgeryToken()
+
+
+
+
+
+
+        <div class="main main-raised " style="border:1px solid #7532e5 ;margin-top:50px">
+            <div class="container">
+
+
+                <div class="section section-contacts">
+                    <div class="row">
+                        <div class="col-md-8 ml-auto mr-auto">
+                            <h2 class="text-center title">Contact Us</h2>
+                            <h4 class="text-center description">Feel free to ask about anything. Please send us your feedback. Our team is open to any suggestions that could help improving our idea.</h4>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Your Name</label>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Your Email</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+                                @Html.TextAreaFor(model => model.Message, htmlAttributes: new { @class = "form-control", @rows = "4", @id = "exampleMessage", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4 ml-auto mr-auto text-center">
+                                    <button type="submit" class="btn btn-primary btn-raised">
+                                        Send Message
+                                    </button>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

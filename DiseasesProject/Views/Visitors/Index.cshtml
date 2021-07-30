@@ -1,0 +1,136 @@
+﻿@model IEnumerable<DiseasesProject.Models.Disease>
+ @{
+     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}  
+
+
+
+
+
+
+
+
+<div   class="page-header header-filter" data-parallax="true" style="height:500px;background-image:url(../../assets/img/bg3.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto tex ">
+                    
+
+                    @using (Ajax.BeginForm("SearchByName", null, new AjaxOptions()
+                    {
+                        UpdateTargetId = "UpdatePanel",
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loadingpic",
+                        OnBegin = "HideData",
+                        OnComplete = "ShowData"
+                    }, htmlAttributes: new { @id = "form1" }))
+                    {
+                        
+                            @Html.TextBox("SearchName", null, new { @class = "form-control", @id = "searchName", @placeholder = "Search" , @style = "font-size:large;color:white" })
+                            <div class="col-lg-2 left" hidden>
+                                <button class="btn btn-default  text-primary" type="submit" hidden><span>Search</span></button>
+                            </div>
+                    }
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div id="loadingpic" style="display:none">
+    <img id="loading" alt="Loading Image" src="~/Content/Images/1.gif" />
+</div>
+<div id="UpdatePanel">
+
+    @Html.Partial("ParialDiseases", Model)
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script>
+            $("#searchName").keydown(function (e) {
+
+                if (e.which == 13) {
+                    $("#form1").submit();
+                }
+
+            })
+          
+
+
+            function HideData() {
+                document.getElementById("UpdatePanel").style.display ="none" ;
+
+            }
+            function ShowData() {
+                document.getElementById("UpdatePanel").style.display = "block";
+
+            }
+        </script>
+}
+
+@section Styles{
+    <style>
+        .panel-body {
+            padding: 20px;
+            margin: 10px;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .panel-heading {
+            height: 50px;
+            margin: 5px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .panel-footer {
+        }
+    </style>
+
+}
+
+
+
+

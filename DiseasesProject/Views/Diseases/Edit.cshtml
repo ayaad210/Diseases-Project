@@ -1,0 +1,111 @@
+﻿@model DiseasesProject.Models.Disease
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal  ">
+        <h4>Disease</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        <div class="row">
+        <div class="form-group col-lg-5" >
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group col-lg-5">
+                @Html.LabelFor(model => model.GeneralInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 ">
+                    @Html.TextAreaFor(model => model.GeneralInfo, new { htmlAttributes = new { @class = "form-control " } })
+
+                    @Html.ValidationMessageFor(model => model.GeneralInfo, "", new { @class = "text-danger",  })
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<hr />
+<div id="loadingpic" style="display:none">
+    <img id="loading" alt="Loading Image" src="~/Content/Images/1.gif" />
+</div>
+<div id="UpdatePanel">
+
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+
+        function HideData() {
+            document.getElementById("UpdatePanel").style.display ="none" ;
+
+        }
+        function ShowData() {
+            document.getElementById("UpdatePanel").style.display = "block";
+
+        }
+
+
+      $(document).ready(function () {
+            // $("#myform").submit();
+             var meterId = @Model.ID;
+            if (meterId && meterId != '') {
+                $.ajax({
+                    url: '@Url.Action("EditDiseaseDiets")',
+                    type: 'GET',
+                    cache: false,                  
+                    data: { Disid: meterId }
+                }).done(function(result) {
+                    $('#UpdatePanel').html(result);
+                });
+            }
+        });
+   // });
+</script>
+        
+
+}
+
+@section Styles{
+    <style>
+        td {
+            vertical-align: middle;
+        }
+
+        .ProductImage {
+            height: 50px;
+            border: 1px solid #000;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+    </style>
+}

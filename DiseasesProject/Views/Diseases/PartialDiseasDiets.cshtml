@@ -1,0 +1,167 @@
+﻿@model DiseasesProject.Models.Disease
+
+<h4 style="color:cornflowerblue">
+Related Info
+</h4>
+<div class="row">
+<div class="col-lg-2">
+    <input type="text" id="ageFrom" class="form-control" placeholder="From Age" />
+
+    </div >  
+   <div class="col-lg-2">
+        <input type="text" id="ageto" class="form-control" placeholder="To Age"/>
+
+
+    </div>
+   <div class="col-lg-1">
+       <select id="dropgender"class="form-control">
+           <option value="1">ذكر</option>
+           <option value="0">انثى</option>
+
+       </select>
+   </div>
+
+    <div class="col-lg-2 ">
+@Html.DropDownList("Diets", ViewBag.Diets as SelectList, "--- Select Diet ---", new { @id = "dropDiets", @class = "form-control" })
+
+    </div>
+    <div class="col-lg-2">
+        @Html.DropDownList("Pres", ViewBag.pres as SelectList, "- Select Precantion --", new { @id = "droppres", @class = "form-control" })
+
+
+    </div>
+
+<div class="col-lg-2">
+    
+    @Html.DropDownList("sports", ViewBag.sports as SelectList, "--- Select Sports ---", new { @id = "dropsports", @class = "form-control" });
+   
+</div>
+
+    <div class="col-lg-1">
+        <input type="button" value="+" id="btnaddNew" />
+
+    </div>
+</div>
+
+
+<table id="mytable" class="table">
+    <tr>
+        <th>
+           Name
+        </th>    
+        <th>
+           AgeFrom
+        </th>
+        <th>
+           AgeTo
+        </th>
+        <th>
+           Gender
+        </th>
+        <th>
+            Prec
+        </th>
+        <th>
+          Sports
+        </th>
+        <th>
+            Diet
+        </th>
+        <th>Delete</th>
+    </tr>
+
+@foreach (var item in Model.DiseaseDiets) {
+    <tr>
+        <td>
+          
+            @Html.DisplayFor(modelItem => item.Disease.Name)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeTo)
+        </td>
+        <td>
+            @if (item.Gender==false)
+            {
+                <span>انثى</span>
+            }
+            else
+            {
+                <span>ذكر</span>
+
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precantion.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sport.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diet.Name)
+        </td>
+        <td>
+            <input type="button" class="btndelete"  id="btndelete"  value="-" />
+            <input type="hidden" value="@item.ID" />
+
+        </td>
+    </tr>
+}
+
+</table>
+
+<script>
+  
+    $('#btnaddNew').click(function () {
+        // $("#myform").submit();
+        var DisId = @Model.ID;
+        var dietid =document.getElementById("dropDiets").value ;
+        var pres =document.getElementById("droppres").value ;
+        var sports =document.getElementById("dropsports").value ;
+
+        var AgeTo_ =document.getElementById("ageto").value ;
+        var AgeFrom_ =document.getElementById("ageFrom").value ;
+
+        var Gender_ =document.getElementById("dropgender").value ;
+        //if (meterId && meterId != '') {
+        $.ajax({
+            url: '@Url.Action("InsertDiseasDiet")',
+            type: 'GET',
+            cache: false,
+            data: {DiseaseID:DisId , PreID: pres ,Sportsid:sports,dlID:dietid,AgeFrom:AgeFrom_,ageto:AgeTo_,gender:Gender_ }
+        }).done(function(result) {
+            $('#mytable').append(result)
+        });
+        // }
+    });
+
+
+
+    $(document).on('click','.btndelete', function(){
+    //$('.btndelete').click(function () {
+        var item=this;
+        var did =item.nextElementSibling.value ;
+     
+
+        $.ajax({
+            url: '@Url.Action("DeleteDisDiet")',
+            type: 'GET',
+            cache: false,
+            data: {DDid:did}
+        }).done(function(result) {
+            if (result=="1") {
+                item.parentElement.parentElement.hidden=true;
+
+            }else {
+                alert("Failed");
+            }
+        });
+         
+    });
+
+    
+
+</script>

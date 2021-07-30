@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DiseasesProject.Models.Disease>
+
+     @foreach (var item in Model) { 
+
+
+
+
+    <div class="main main-raised">
+       
+
+        <div class="container" style="margin-bottom:50px">
+            <h2>@item.Name</h2>
+            <hr />
+            <p>@item.GeneralInfo 
+         
+             </p>
+
+            <p >     @Html.ActionLink("More Info...", "MoreInfo", new { DisID = item.ID }, new {@class="btn btn-primary" ,@style = "border:1px dotted;margin:2px" })
+
+</div>
+    </div>
+
+
+
+
+     }
+
+
+   
+
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DiseasesProject.Models.Diet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Diets</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr class="row">
+        <th>
+            @Html.DisplayNameFor(model => model.Diet1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="row">
+        <td class="col-lg-6">
+            @Html.DisplayFor(modelItem => item.Diet1)
+        </td>
+        <td class="col-lg-3">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="col-lg-3">
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, htmlAttributes: new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

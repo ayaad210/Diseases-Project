@@ -1,0 +1,133 @@
+﻿@model DiseasesProject.Models.DiseaseDiet
+
+@{
+    ViewBag.Title = "MoreInfo";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+}
+
+
+<div class="page-header header-filter" data-parallax="true" style="height:200px;background-image:url(../../assets/img/bg3.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto tex">
+    
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="main main-raised">
+    <div class="container">
+        <h2>@Model.Disease.Name</h2>
+        <p style="font-weight: bold;">
+            @Model.Disease.GeneralInfo
+            <hr />
+        </p>
+        <!--                 nav pills -->
+
+        <div class="col-lg-6 col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="nav nav-pills nav-pills-icons flex-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#dashboard-2" role="tab" data-toggle="tab">
+                                Diet
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#schedule-2" role="tab" data-toggle="tab">
+                                pre
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#schedule-3" role="tab" data-toggle="tab">
+                                sport
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="dashboard-2">
+                           @Model.Diet.Diet1
+
+                        </div>
+                        <div class="tab-pane" id="schedule-2">
+                           @Model.Precantion.Info
+                        </div>
+                        <div class="tab-pane" id="schedule-3">
+                            @Model.Sport.Info
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+@Scripts.Render("~/bundles/jqueryval");
+
+<script>
+
+
+    function Diet() {
+        hidedata();
+        aler("2");
+        $("#dietdata").show();
+
+    }
+    function pre() {
+        hidedata();
+
+        $("#predata").show();
+
+    }
+    function sports() {
+        hidedata();
+
+        $("#sportsdata").show();
+
+    }
+    $(document).ready(function () {
+
+        hidedata();
+    });
+    function hidedata() {
+       
+        $(".data").hide();
+
+    };
+    </script>    
+    
+    }
+
+@section Styles{
+    <style>
+        section {
+            background-color: lightgrey;
+            width: 80%;
+            padding: 20px;
+            margin: 10px;
+        }
+    </style>
+
+}

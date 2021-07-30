@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DiseasesProject.Models.Sport>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sports</h2>
+
+    @Html.ActionLink("Create New", "Create",null,htmlAttributes: new { @class = "btn btn-default" })
+<table class="table ">
+    <tr class="row">
+        <th>
+            @Html.DisplayNameFor(model => model.Info)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="row ">
+        <td class="col-lg-6 ">
+            @Html.DisplayFor(modelItem => item.Info)
+        </td>
+        <td class="col-lg-3" >
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="col-lg-3">
+            @Html.ActionLink("Edit", "Edit", new { id=item.id },htmlAttributes:new {@class= "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }, htmlAttributes: new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

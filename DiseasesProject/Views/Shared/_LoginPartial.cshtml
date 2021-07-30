@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@using DiseasesProject.Models
+@if (Request.IsAuthenticated)
+{
+    ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+    {
+    @Html.AntiForgeryToken()
+
+        @*<li class="nav-item">
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>*@
+
+        <li  class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    }
+
+
+
+
+        <li class="nav-item">
+            @Html.ActionLink("Diseases", "index", "Visitors",null,new { @class = "nav-link" })
+        </li>
+
+    if (user.Roles.Where(r => r.RoleId == new ApplicationDbContext().Roles.Where(rr => rr.Name == "Admins").First().Id).ToList().Count > 0)
+    {
+
+
+        <li class="nav-item " >
+
+
+            <a href="~/Diseases/index" class="nav-link">
+               <img style="width:40px"  src="~/assets/img/Settingsx_1.png" class="small "/></a>
+
+        </li>
+
+        @*<div class="dropdown nav-item">
+            <a href="" class="dropdown-toggle nav-link" data-toggle="dropdown">Disease</a>
+            <div class="dropdown-menu">
+                <h6 class="dropdown-header">Main Disease</h6>
+                <a href="~/Diseases/index" class="dropdown-item">Diseases</a>
+                
+                <div class="dropdown-divider"></div>
+                <a href="~/Diets/index" class="dropdown-item">Diets</a>
+                <div class="dropdown-divider"></div>
+                <a href="~/Sports/index" class="dropdown-item">Sports</a>
+                <div class="dropdown-divider"></div>
+                <a href="~/precantions/index" class="dropdown-item">Pecenaton</a>
+                <div class="dropdown-divider"></div>
+                <a href="~/Contacts/index" class="dropdown-item">Contacts</a>
+
+            </div>
+        </div>*@
+    }
+
+
+
+
+
+
+}
+else
+{
+                    <li  class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" , @class = "nav-link" })</li>
+                    <li  class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+
+ }

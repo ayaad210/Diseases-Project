@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="page-header header-filter" data-parallax="true" style="background-image:url(../../assets/img/bg3.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="brand text-center">
+                    <h1>Diseases Project</h1>
+                    <h3 class="title text-center"><a href="~/visitors/Index" class="btn btn-primary">Get Started...</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main main-raised">
+    <div id="typography" class="cd-section">
+        <div class="section text-center">
+            <h2>Typography</h2>
+        </div>
+    </div>
+    <div class="container">
+        <p> Chronic diseases’ patients have been in a considerably increase during the last few years. Some of these patients go to doctors, take their prescriptions and complete their routine life, feeling no difference. Some others face many difficulties although they’re on medications, so they go through one of two ways: either keep going to doctors, consuming more money, time and causing more pressure on clinics, or they ignore the difficulties and symptoms and as a result, their conditions get worse and might end up with serious consequences or even death.</p>
+        <p>In here, we’re trying to solve some of the problems mentioned above, where it provides most of the information about some chronic diseases like diabetes1, diabetes2 and overweight. These pieces of information are considered the basic data a patient should know about the disease to learn how to cope with it and avoid any future complications. Furthermore, it helps decreasing the patients’ density in clinics giving a chance to critical patients that really need to follow up with doctors.</p>
+    </div>
+</div>
+<div id="contact">
+
+    @Html.Partial("~/Views/Contacts/_ContactParital.cshtml", new DiseasesProject.Models.Contact());
+
+</div>
+
+<script type="text/javascript">
+  (function con() {
+        if (getUrlParameter("contact") == "1") {
+            alert("Success");
+
+        }
+    })();
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+</script>
